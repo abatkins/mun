@@ -1,25 +1,36 @@
-class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  before_save :setup_role
+require 'role_model'
 
-  has_and_belongs_to_many :roles
-  has_many :posts
+class User < ActiveRecord::Base
+
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :role_ids
+  # For more info on RoleModel, go to:  https://github.com/martinrehfeld/role_model
+  include RoleModel
 
-  def role?(role)
-    return !!self.roles.find_by_name(role.to_s.camelize)
-  end
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :roles, :roles_mask
+
+  # optionally set the integer attribute to store the roles in,
+  # :roles_mask is the default
+  roles_attribute :roles_mask
+
+  # declare the valid roles -- do not change the order if you add more
+  # roles later, always append them at the end!
+  roles :admin, :registered, :staff
+
+  before_save :default_role
 
   # Default role is "Registered"
-  def setup_role
-    if self.role_ids.empty?
-      self.role_ids = [2]
+  def default_role
+    if self.roles.empty?
+      self.roles = [:registered]
     end
+
   end
 
 end
+

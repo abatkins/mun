@@ -42,7 +42,7 @@ class Admin::UsersController < Admin::AdminController
   def create
     @user = User.new(params[:user])
     @user.attributes = params[:user]
-    @user.role_ids = params[:user][:role_ids] if params[:user]
+    @user.roles = params[:user][:roles] if params[:user]
     respond_to do |format|
       if @user.save
         flash[:notice] = flash[:notice].to_a.concat @user.errors.full_messages

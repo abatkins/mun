@@ -152,6 +152,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    role_model (0.8.1)
     rolify (3.2.0)
     rspec-core (2.14.7)
     rspec-expectations (2.14.4)
@@ -234,6 +235,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.16)
   rails_layout
+  role_model
   rolify
   rspec-rails
   sass-rails (~> 3.2.3)
