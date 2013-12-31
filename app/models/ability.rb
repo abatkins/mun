@@ -8,7 +8,7 @@ class Ability
     if user.has_role? :admin
       # an admin can do everything
       can :manage, :all
-    elsif user.has_role? :editor
+    elsif user.has_role? :staff
       # an editor can do everything to documents and reports
       can :manage, [Document, Report]
       # but can only read, create and update charts (ie they cannot
@@ -17,8 +17,9 @@ class Ability
       can [:read, :create, :update], Chart
       # an editor can only view the annual report
       can :read, AnnualReport
-    elsif user.has_role? :guest
-      can
+    elsif user.has_role? :registered
+      can :read, [Document, Report, Chart]
+    end
 
     # Define abilities for the passed in user here. For example:
     #
