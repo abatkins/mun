@@ -46,17 +46,29 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Mun</a>
+          <a class="brand" href="#">WMHMUN XXVII</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <li><%= link_to "About", "/path1"  %></li>
+              <li><%= link_to "Committees", "/path2"  %></li>
+              <li><%= link_to "Schedule", "/path3"  %></li>
+              <li><%= link_to "Registration", "/path4"  %></li>
+              <li><%= link_to "Travel & Accomodations", "/path5"  %></li>
+              <li><%= link_to "Contact Us", "/path6"  %></li>
+              <li><%= link_to "FAQ", "/path7"  %></li>
+              <li><%= link_to "Register", new_user_registration_path  %></li>
+              <li><%= link_to "Login", user_session_path %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
+
+
+    <% if user_signed_in? %>
+      <% #link_to "My Profile", user_root_path%>
+      <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
+    <%end%>
 
     <div class="container-fluid">
       <div class="row-fluid">
@@ -64,9 +76,9 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <li><%= link_to "About", "/path1"  %></li>
+              <li><%= link_to "Committees", "/path2"  %></li>
+              <li><%= link_to "Schedule", "/path3"  %></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

@@ -1,10 +1,20 @@
 Mun::Application.routes.draw do
-  get "static/index"
+
+  # Devise routes
+  devise_for :users, :path_names => {:sign_in => "login", :sign_out => "logout"}, :path => "users"
+  resources :users
+
+  namespace :admin do
+    match '/' => 'users#index'
+    resources :users
+  end
+
+  get "static_pages/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  root :to => "static#index"
+  root :to => "static_pages#index"
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
