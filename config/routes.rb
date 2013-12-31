@@ -1,8 +1,5 @@
 Mun::Application.routes.draw do
 
-  resources :news
-
-
   # Devise routes
   devise_for :users, :path_names => {:sign_in => "login", :sign_out => "logout"}, :path => "users"
   resources :users
@@ -10,6 +7,7 @@ Mun::Application.routes.draw do
   namespace :admin do
     match '/' => 'users#index'
     resources :users
+    resources :news
   end
 
   get "static_pages/index"

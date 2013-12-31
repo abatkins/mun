@@ -10,7 +10,7 @@ class Ability
       can :manage, :all
     elsif user.has_role? :staff
       # an editor can do everything to documents and reports
-      can :manage, [Document, Report]
+      can :manage, [News, Report]
       # but can only read, create and update charts (ie they cannot
       # be destroyed or have any other actions from the charts_controller.rb
       # executed)
@@ -18,7 +18,7 @@ class Ability
       # an editor can only view the annual report
       can :read, AnnualReport
     elsif user.has_role? :registered
-      can :read, [Document, Report, Chart]
+      can :read, [News, Report, Chart]
     end
 
     # Define abilities for the passed in user here. For example:
